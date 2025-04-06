@@ -1,0 +1,11 @@
+div{
+    margin-top: 230px;
+    
+}
+
+ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 20px;
+}

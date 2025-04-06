@@ -1,0 +1,199 @@
+
+/* ----- ESTILOS GENERALES ----- */
+h2 {
+    color: #ED9421;
+    font-family: "Playwrite BE VLG", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 2em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.section-body-especiales {
+    text-align: center;
+    padding: 20px;
+    height: auto;
+    margin-bottom: auto;
+    margin-top: auto ;    
+}
+
+/* ----- CONTENEDOR DE TARJETAS ----- */
+.productos-container {
+    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+    justify-content: center;
+    padding: 20px; 
+    margin-top: 10px;
+    margin-bottom: auto; 
+    height: auto;
+    
+}
+
+/* ----- TARJETA ----- */
+.card {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    padding: 10px; 
+    max-width: 280px; 
+    width: 100%;
+    height: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin: 3px; 
+}
+
+.card:hover {
+    transform: translateY(-5px); 
+}
+
+/* ----- IMAGEN PRODUCTO ----- */
+.card img:not(.carritomas) {
+    max-width: 100%;
+    width: 70%; 
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card img:not(.carritomas):hover {
+    transform: scale(1.1); 
+}
+
+/* ----- TEXTO EN TARJETAS ----- */
+.card h3 {
+    font-size: 1.4em;
+    margin: 8px 0;
+}
+
+.card p {
+    font-size: 1.1em;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* ----- INPUT Y BOTÓN ----- */
+
+.grupo-input {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    margin-top: 10px;
+    justify-content: center;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 1px solid blue; */
+    
+}
+
+input[id^="cantidad-"] {
+    width: 52px;
+    padding: 8px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f0f4f8;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+input[id^="cantidad-"]:focus {
+    outline: none;
+    border-color: #ED9421;
+    box-shadow: 0 0 8px rgba(237, 148, 33, 0.5);
+}
+
+/* ----- BOTÓN DEL CARRITO ----- */
+
+.btn-mas, .btn-menos {
+    margin:auto;
+    font-size: larger;
+    padding: 5px;
+}
+
+.btn-carritomas {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    min-width: 50px; /* Evita que el botón desaparezca */
+    margin-left: auto;
+    
+    
+    
+}
+
+.btn-carritomas img {
+    width: 40px; 
+    height: auto; 
+    max-height: 40px; 
+    object-fit: contain; /* Evita distorsiones si hay un recorte */
+    transition: transform 0.2s ease-in-out;
+}
+
+
+
+.btn-carritomas:hover img {
+    transform: scale(1.1);
+}
+
+/* ----- RESPONSIVE ----- */
+/* Para tablets y pantallas medianas */
+@media screen and (max-width: 768px) {
+    .productos-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .card {
+        max-width: 280px;
+    }
+
+    .card h3 {
+        font-size: 1.2em;
+    }
+
+    .card p {
+        font-size: 1em;
+    }
+}
+
+/* Para móviles */
+@media screen and (max-width: 480px) {
+    .productos-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+        max-width: 300px;
+        
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .card h3 {
+        font-size: 1.1em;
+    }
+
+    .card p {
+        font-size: 0.9em;
+    }
+}
+

@@ -1,0 +1,199 @@
+.alta-checkbox {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.alta-form {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    justify-content: end;
+    width: 70%;
+    /* Tamaño uniforme de las tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+    margin: auto auto;
+    padding: 30px;
+
+    border-radius: 20px;
+
+
+
+}
+
+.input-group {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    text-transform: capitalize;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="checkbox"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+    background-color: #e9b066;
+    border-color: #5CC064;
+    outline: none;
+}
+
+.alta-checkbox .input-group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.alta-checkbox label {
+    margin-left: 8px;
+}
+
+.error-detail {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+button#btn-agregar {
+    width: 20%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bolder;
+    color: #fff;
+    background-color: #5CC064;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 40%;
+}
+
+button#btn-agregar:hover {
+    background-color: #e2cd11;
+}
+
+
+
+div form {
+    justify-content: center;
+}
+
+
+th,
+td {
+    border: 1px solid #999;
+    width: auto;
+    height: 30px;
+    padding: 10px;
+}
+
+th {
+    text-transform: uppercase;
+    background-color: #111;
+    color: white;
+    /* border: 1px solid white; */
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px auto 100px auto;
+    width: 60%; 
+    table-layout: fixed; 
+    
+}
+
+div h2 {
+    text-align: center;
+}
+
+td img {
+    width: 100px;
+    height: auto;
+}
+
+.btn-eliminar{
+    padding: 10px;
+}
+
+th:nth-child(1), td:nth-child(1) { 
+    width: 100px;  
+    word-wrap: break-word;
+    text-align: left;
+}
+
+th:nth-child(2), td:nth-child(2){ 
+    width: 200px; 
+    word-wrap: break-word;
+    text-align: left;
+    
+}
+
+th:nth-child(3), td:nth-child(3){ 
+    width: 100px; 
+    word-wrap: break-word;
+    text-align: left;
+    
+}
+
+th:nth-child(4), td:nth-child(4){ 
+    width: 100px; 
+    word-wrap: break-word;
+    text-align: left;
+    
+}
+
+th:nth-child(5), td:nth-child(5) { 
+    width: 300px !important;  
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
+    white-space: normal; /* Permite que el texto se ajuste al ancho */
+}
+
+th:nth-child(6), td:nth-child(6){ 
+    width: 500px !important;  
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: left;
+    white-space: normal; /* Permite que el texto se ajuste al ancho */
+    
+}
+
+
+
+/********   LA PARTE DEL CAMPO DE FOTO ********/
+
+.drop-zone {
+  border: 2px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.drop-zone:hover {
+  background: #f8f8f8;
+}
