@@ -10,3 +10,6 @@ router.put("/:id", actualizarProducto);
 router.delete("/:id", eliminarProducto);
 
 export default router;
+
+
+

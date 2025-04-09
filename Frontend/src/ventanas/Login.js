@@ -10,6 +10,11 @@ const Login = () => {
         password: "",
     });
 
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const navigate = useNavigate(); // Para redirigir después del login
 
     const handleChange = (e) => {
@@ -61,7 +66,17 @@ const Login = () => {
                     </div>
                     <div className="input-group-login">
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} required />
+                        <div className="ocultar-pass">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                           
+                        </div>
                     </div>
                     <button type="submit">Ingresar</button>
                 </form>

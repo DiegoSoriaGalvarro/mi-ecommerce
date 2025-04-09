@@ -63,19 +63,37 @@ const Alta = () => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const file = e.dataTransfer.files[0]; // Obtiene el archivo arrastrado
-
+  
+    // Si arrastra desde el explorador de archivos
+    const file = e.dataTransfer.files[0];
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData((prev) => ({ ...prev, foto: event.target.result })); // Guarda la URL en el estado
+        setFormData((prev) => ({ ...prev, foto: event.target.result }));
       };
       reader.readAsDataURL(file);
+    } else {
+      // Si arrastra desde una web (por ejemplo un <img>)
+      const imageUrl = e.dataTransfer.getData("text/uri-list") || e.dataTransfer.getData("text/plain");
+      if (imageUrl && imageUrl.startsWith("http")) {
+        setFormData((prev) => ({ ...prev, foto: imageUrl }));
+      }
     }
   };
 
   const handleDragOver = (e) => {
     e.preventDefault(); // Evita que el navegador abra la imagen en una nueva pestaña
+  };
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setFormData((prev) => ({ ...prev, foto: event.target.result }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -106,15 +124,32 @@ const Alta = () => {
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
-          <label htmlFor="foto">Foto</label>
-          <input
-            name="foto"
-            type="text"
-            value={formData.foto}
-            onChange={handleChange}
-            placeholder="Pega una URL o arrastra una imagen"
-          />
-          {formData.foto && <img src={formData.foto} alt="Previsualización" width="100" />}
+        <label htmlFor="foto">Foto</label>
+        <input
+         name="foto"
+         type="text"
+         value={formData.foto}
+         onChange={handleChange}
+         placeholder="Pega una URL o arrastra una imagen"
+        />
+
+         {/* Input oculto para cargar imagen desde disco */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileSelect}
+          style={{ display: "none" }}
+          id="fileInput"
+        />
+        <button
+          className= 'boton-buscar'
+          type="button"
+          onClick={() => document.getElementById("fileInput").click()}
+        >
+        Buscar imagen en disco
+        </button>
+
+         {formData.foto && <img src={formData.foto} alt="Previsualización" width="100" />}
         </div>
 
         <div className="input-group">
