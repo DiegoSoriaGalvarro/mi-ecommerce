@@ -15,8 +15,8 @@ const app = express();
 connectDB();
 
 // Habilitar CORS
-//app.use(cors({ origin: "http://localhost:3000" })); // Permitir solicitudes desde el frontend
-app.use(cors({ origin: "https://mi-ecommerce.onrender.com" }));
+app.use(cors({ origin: "http://localhost:3000" })); // Permitir solicitudes desde el frontend
+//app.use(cors({ origin: "https://mi-ecommerce.onrender.com" }));
 app.use(express.json());
 
 // Rutas
