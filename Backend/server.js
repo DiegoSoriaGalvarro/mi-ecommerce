@@ -16,7 +16,7 @@ connectDB();
 
 // Habilitar CORS
 app.use(cors({
-  origin: ["http://localhost:3000", "https://mi-ecommerce.onrender.com"]
+  origin: ["http://localhost:3000", "https://dibabios.glitch.me"]
 }));
 app.use(express.json());
 
