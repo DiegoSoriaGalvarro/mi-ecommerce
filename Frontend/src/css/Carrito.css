@@ -3,16 +3,19 @@
     display: flex;
     flex-direction: column; 
     align-items: center;
-    width: 90%;
+    width: 100%;
     margin: 10px auto 500px auto;
   }
 
   .tabla-carrito {
-    width: 100%;
-    max-width: 800px;
+    width: 55%;
+    max-width: 55%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    table-layout: fixed;
   }
 
   .tabla-carrito th, .tabla-carrito td {
@@ -20,6 +23,8 @@
     padding: 10px;
     text-align: center;
   }
+
+  
 
   .tabla-carrito th {
     background-color: #0e0d0d;
@@ -43,8 +48,20 @@ h2 {
     margin-top: 20px;
     padding: 10px;
     border-top: 2px solid #ddd;
+    width: 55%;
   }
   
+  h3{
+    color: #070707;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    width: 45%;
+}
+
+
   .pagar-btn {
     background-color: green;
     color: white;
@@ -54,13 +71,18 @@ h2 {
     cursor: pointer;
     border-radius: 5px;
     margin-left: 20px;
+    width: 150px;
   }
 
   .pagar-btn:hover {
     background-color: darkgreen;
   }
 
-
+  .pagar-btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
 
   .cantidad-texto {
     margin: 0 0px;
@@ -94,6 +116,46 @@ h2 {
   .eliminar-btn:hover {
     background-color: darkred;
   }
+
+  /* columna 6 = precio_total */
+.tabla-carrito th:nth-child(6),
+.tabla-carrito td:nth-child(6){ 
+  width: 100px; 
+  max-width: 100px;
+  overflow: hidden;
+  
+}
+
+/* columna 7 = eliminar */
+.tabla-carrito th:nth-child(7),
+.tabla-carrito td:nth-child(7){ 
+  width: 90px; 
+  max-width: 90px;
+  overflow: hidden;
+  
+}
+
+/* columna 5 = cantidad */
+.tabla-carrito th:nth-child(5),
+.tabla-carrito td:nth-child(5){ 
+  width: 120px; 
+  max-width: 120px;
+  overflow: hidden;
+  
+}
+
+.btn-mas, .btn-menos {
+  margin:auto;
+  font-size: larger;
+  padding: 5px;
+  width: auto;
+  height: auto;
+}
+  
+
+
+ 
+
 
   /* *****************  ALERTAS  ******************************* */
   
@@ -153,21 +215,5 @@ h2 {
 .swal2-cancel:hover {
   background-color: #5a6268 !important;
 }
+/***********************************************************************************/
 
-th:nth-child(7), td:nth-child(7){ 
-  width: 100px; /* Ajusta según necesites */
-  
-}
-
-th:nth-child(5), td:nth-child(5){ 
-  width: 100px; /* Ajusta según necesites */
-  
-}
-
-.btn-mas, .btn-menos {
-  margin:auto;
-  font-size: larger;
-  padding: 5px;
-  width: auto;
-  height: auto;
-}

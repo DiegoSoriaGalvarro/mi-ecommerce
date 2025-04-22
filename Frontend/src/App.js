@@ -23,7 +23,15 @@ import Login from "./ventanas/Login";
 import Register from "./ventanas/Register";
 
 function App() {
-  const [carrito, setCarrito] = useState([]); // Estado global del carrito
+  const [carrito, setCarrito] = useState(() => {
+    const guardado = localStorage.getItem("carritoItems");
+    try {
+      return guardado ? JSON.parse(guardado) : [];
+    } catch (e) {
+      console.error("Error al cargar carrito del localStorage:", e);
+      return [];
+    }
+  });
   const [usuarioRol, setUsuarioRol] = useState(sessionStorage.getItem("usuarioRol") || "");
 
   useEffect(() => {

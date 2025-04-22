@@ -3,6 +3,9 @@ import axios from "axios";
 // import "../css/Main.css";
 import "../css/Alta.css";
 
+
+
+
 const API_URL = process.env.REACT_APP_API_URL + "/api/productos";
 
 const Alta = () => {
@@ -33,23 +36,55 @@ const Alta = () => {
 
   // Manejo de cambios en el formulario
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+      // Si está escribiendo en el campo de foto, quitamos archivo anterior
+      ...(name === "foto" && { fotoArchivo: null }),
+    }));
   };
 
   // Función para agregar un producto
   const agregarProducto = async (e) => {
     e.preventDefault();
-    console.log("Estado del formulario antes de enviar:", formData);
+  
+    const form = new FormData();
+    form.append("nombre", formData.nombre);
+    form.append("precio", formData.precio);
+    form.append("detalle", formData.detalle);
+    form.append("categoria", formData.categoria);
+  
+    // Si subió archivo desde disco
+    if (formData.fotoArchivo) {
+      form.append("fotoArchivo", formData.fotoArchivo);
+    } else {
+    // Si pegó o arrastró una URL 
+      form.append("foto", formData.foto);
+    }
+  
+    console.log("🟢 Enviando datos:", {
+      nombre: formData.nombre,
+      precio: formData.precio,
+      detalle: formData.detalle,
+      categoria: formData.categoria,
+      fotoArchivo: formData.fotoArchivo,
+      foto: formData.foto,
+    });
 
     try {
-      const response = await axios.post(API_URL, formData);
-      setProductos([...productos, response.data]); // Agregar nuevo producto a la tabla
-
-      setFormData({ nombre: "", foto: "", precio: "", detalle: "", categoria: "" }); // Resetear formulario
+      const response = await axios.post(API_URL, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setProductos([...productos, response.data]);
+      setFormData({ nombre: "", foto: "", precio: "", detalle: "", categoria: "", fotoArchivo: null });
     } catch (error) {
-      console.error("Error al agregar producto:", error);
+      console.error("Error al agregar producto:", error.response?.data || error.message);
     }
   };
+  
 
   // Función para eliminar un producto
   const eliminarProducto = async (id) => {
@@ -69,14 +104,25 @@ const Alta = () => {
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData((prev) => ({ ...prev, foto: event.target.result }));
+        setFormData((prev) => ({
+          ...prev,
+          foto: event.target.result,       // para mostrar previsualización
+          fotoArchivo: file                // esto es lo que se envía al backend
+        }));
       };
       reader.readAsDataURL(file);
     } else {
-      // Si arrastra desde una web (por ejemplo un <img>)
-      const imageUrl = e.dataTransfer.getData("text/uri-list") || e.dataTransfer.getData("text/plain");
+      // Si arrastra desde la web
+      const imageUrl =
+        e.dataTransfer.getData("text/uri-list") ||
+        e.dataTransfer.getData("text/plain");
+  
       if (imageUrl && imageUrl.startsWith("http")) {
-        setFormData((prev) => ({ ...prev, foto: imageUrl }));
+        setFormData((prev) => ({
+          ...prev,
+          foto: imageUrl,            // para previsualizar y enviar como texto
+          fotoArchivo: null          // limpiamos si antes se eligió un archivo
+        }));
       }
     }
   };
@@ -90,9 +136,16 @@ const Alta = () => {
     if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        setFormData((prev) => ({ ...prev, foto: event.target.result }));
+        setFormData((prev) => ({
+          ...prev,
+          fotoArchivo: file,
+          foto: event.target.result // para previsualizar
+        }));
       };
       reader.readAsDataURL(file);
+    } else {
+      alert("Por favor, selecciona un archivo de imagen válido.");
+      console.error("El archivo no es una imagen válida.");
     }
   };
 
@@ -137,6 +190,7 @@ const Alta = () => {
         <input
           type="file"
           accept="image/*"
+          name="fotoArchivo"
           onChange={handleFileSelect}
           style={{ display: "none" }}
           id="fileInput"

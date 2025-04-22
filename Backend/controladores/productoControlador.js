@@ -3,11 +3,38 @@ import Producto from "../modelos/Producto.js";
 
 export const crearProducto = async (req, res) => {
   try {
-    const producto = new Producto(req.body);
+    // LOG para depurar datos que llegan desde el frontend
+    console.log("🟡 req.body:", req.body);
+    console.log("🟡 req.file:", req.file);
+
+    const { nombre, precio, detalle, categoria, foto } = req.body;
+
+    let fotoFinal = "";
+
+    if (req.file) {
+      fotoFinal = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+    } else if (foto && foto.startsWith("http")) {
+      fotoFinal = foto;
+    } else {
+      // Si no hay imagen válida
+      return res.status(400).json({ msg: "Imagen no válida" });
+    }
+
+    //  Mostrar el resultado final de la imagen que se va a guardar
+    console.log("fotoFinal:", fotoFinal);
+    const producto = new Producto({
+      nombre,
+      precio,
+      detalle,
+      categoria,
+      foto: fotoFinal
+    });
+
     await producto.save();
     res.status(201).json(producto);
   } catch (error) {
-    res.status(500).json({ msg: "Error al crear producto" });
+    console.error("🔴 Error al crear producto:", error);
+    res.status(500).json({ msg: "Error al crear producto", error: error.message });
   }
 };
 

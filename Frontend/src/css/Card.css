@@ -71,6 +71,7 @@ h2 {
 .card h3 {
     font-size: 1.4em;
     margin: 8px 0;
+    width: 100%;
 }
 
 .card p {
@@ -163,6 +164,7 @@ input[id^="cantidad-"]:focus {
 
     .card h3 {
         font-size: 1.2em;
+        width: 100%;
     }
 
     .card p {
@@ -190,6 +192,7 @@ input[id^="cantidad-"]:focus {
 
     .card h3 {
         font-size: 1.1em;
+        width: 100%;
     }
 
     .card p {
