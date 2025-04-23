@@ -16,7 +16,7 @@ connectDB();
 
 // Habilitar CORS
 //app.use(cors({ origin: "http://localhost:3000" }));  Permitir solicitudes desde el frontend
-app.use(cors({ origin: process.env.FRONTEND_URL }));// Permitir solicitudes desde el frontend
+app.use(cors({ origin: process.env.REACT_APP_API_URL }));// Permitir solicitudes desde el frontend
 app.use(express.json());
 
 // Rutas
