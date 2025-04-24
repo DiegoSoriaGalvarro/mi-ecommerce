@@ -15,8 +15,19 @@ const app = express();
 connectDB();
 
 // Habilitar CORS
-app.use(cors({ origin: "http://localhost:3000" }));  Permitir solicitudes desde el frontend
-//app.use(cors({ origin: process.env.REACT_APP_API_URL })); Permitir solicitudes desde el frontend
+const allowedOrigins = [
+  "https://difabios-tienda.glitch.me",
+  "http://localhost:3000"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error("Not allowed by CORS"));
+  }
+}));
 app.use(express.json());
 
 // Rutas
